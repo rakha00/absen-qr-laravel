@@ -15,4 +15,4 @@ Implementing the QR code attendance web application, with database migrations cr
 ## Next Steps
 
 1.  Eloquent Models and Relationships implemented.
-2.  Seed the database with initial data.
+2.  All database migrations have been run and the database has been seeded with initial data.
