@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -22,6 +23,14 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    /**
+     * Get the courses taught by the user (lecturer).
+     */
+    public function courses(): HasMany
+    {
+        return $this->hasMany(Course::class, 'lecturer_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
