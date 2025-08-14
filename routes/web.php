@@ -25,7 +25,9 @@ Route::middleware('auth')->group(function () {
 
     // Course Management Routes
     Route::resource('courses', CourseController::class);
-    Route::resource('courses.course-sessions', CourseSessionController::class)->except(['index']);
+    Route::resource('courses.course-sessions', CourseSessionController::class)->except(['index'])->parameters([
+        'course-sessions' => 'session',
+    ]);
     Route::get('courses/{course}/course-sessions', [CourseSessionController::class, 'index'])->name('courses.course-sessions.index');
 });
 

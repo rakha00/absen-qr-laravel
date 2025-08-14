@@ -17,9 +17,8 @@
 <body class="antialiased bg-gray-50">
 
 	<!-- Navbar -->
-	<header
-		class="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center px-4 py-4 bg-white/80 backdrop-blur-md shadow-sm">
-		<div class="text-xl font-bold text-blue-600 text-center sm:text-left">AbsenQR</div>
+	<header class="w-full flex justify-center items-center px-4 py-4 bg-white/80 backdrop-blur-md shadow-sm">
+		<div class="text-xl font-bold text-blue-600">AbsenQR</div>
 	</header>
 
 	<!-- Hero Section -->

@@ -4,8 +4,8 @@
 	<div class="container mx-auto px-4 py-8">
 		<div class="flex justify-between items-center mb-4">
 			<h1 class="text-2xl font-semibold">Session Details for {{ $course->name }}</h1>
-			<a href="{{ route('courses.course-sessions.index', $course->id) }}"
-				class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Back to Sessions</a>
+			<a href="{{ route('courses.show', $course->id) }}"
+				class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Back to Course Details</a>
 		</div>
 
 		<div class="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -118,16 +118,16 @@
 			@endif
 		</div>
 
-		{{-- <div class="mt-6 flex">
-			<a href="{{ route('courses.course-sessions.edit', ['course' => $course->id, 'course_session' => $session->id]) }}"
+		<div class="mt-6 flex">
+			<a href="{{ route('courses.course-sessions.edit', ['course' => $course->id, 'session' => $session->id]) }}"
 				class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md mr-2">Edit</a>
 			<form
-				action="{{ route('courses.course-sessions.destroy', ['course' => $course->id, 'course_session' => $session->id]) }}"
+				action="{{ route('courses.course-sessions.destroy', ['course' => $course->id, 'session' => $session->id]) }}"
 				method="POST" onsubmit="return confirm('Are you sure you want to delete this session?');">
 				@csrf
 				@method('DELETE')
 				<button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">Delete</button>
 			</form>
-		</div> --}}
+		</div>
 	</div>
 @endsection
