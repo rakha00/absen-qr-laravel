@@ -6,6 +6,7 @@ use App\Models\Attendance;
 use App\Models\CourseSession;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class AttendanceController extends Controller
@@ -15,17 +16,17 @@ class AttendanceController extends Controller
         $session = CourseSession::where('qr_code_data', $uuid)->firstOrFail();
 
         // Check if the session is active
-        if (! $session->is_active) {
+        if (!$session->is_active) {
             return redirect('/')->with('error', 'This attendance session is not active.');
         }
 
         // Check if current time is within session start and end times
         $currentTime = now();
-        $startTime = \Carbon\Carbon::parse($session->session_date->format('Y-m-d').' '.$session->start_time);
-        $endTime = \Carbon\Carbon::parse($session->session_date->format('Y-m-d').' '.$session->end_time);
+        $startTime = $session->session_date->setTimeFrom($session->start_time);
+        $endTime = $session->session_date->setTimeFrom($session->end_time);
 
         if ($currentTime->lt($startTime) || $currentTime->gt($endTime)) {
-            return redirect('/')->with('error', 'This attendance session is not currently open.');
+            return view('attendance.form', compact('session', 'uuid'))->with('error', 'This attendance session is not currently open.');
         }
 
         return view('attendance.form', compact('session', 'uuid'));
@@ -36,14 +37,15 @@ class AttendanceController extends Controller
         $session = CourseSession::where('qr_code_data', $uuid)->firstOrFail();
 
         // Check if the session is active
-        if (! $session->is_active) {
+        if (!$session->is_active) {
             return back()->with('error', 'This attendance session is not active.')->withInput();
         }
 
         // Check if current time is within session start and end times
         $currentTime = now();
-        $startTime = \Carbon\Carbon::parse($session->session_date->format('Y-m-d').' '.$session->start_time);
-        $endTime = \Carbon\Carbon::parse($session->session_date->format('Y-m-d').' '.$session->end_time);
+        $startTime = $session->session_date->setTimeFrom($session->start_time);
+        $endTime = $session->session_date->setTimeFrom($session->end_time);
+
 
         if ($currentTime->lt($startTime) || $currentTime->gt($endTime)) {
             return back()->with('error', 'This attendance session is not currently open.')->withInput();

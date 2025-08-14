@@ -34,3 +34,4 @@ Route::middleware('auth')->group(function () {
 // Attendance Routes (Public)
 Route::get('/attendance/{uuid}', [AttendanceController::class, 'show'])->name('attendance.show');
 Route::post('/attendance/{uuid}', [AttendanceController::class, 'store'])->name('attendance.store');
+Route::get('/success', [AttendanceController::class, 'success'])->name('attendance.success');
