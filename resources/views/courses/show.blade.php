@@ -50,10 +50,10 @@
 								<p class="text-gray-500 text-sm">{{ $session->session_date->format('Y-m-d H:i') }}</p>
 							</div>
 							<div class="flex gap-2">
+								<a href="{{ asset($session->qr_code_path) }}" target="_blank"
+									class="px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md text-xs font-medium transition">QR</a>
 								<a href="{{ route('courses.course-sessions.show', [$course->id, $session->id]) }}"
 									class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-md text-xs font-medium transition">View</a>
-								<a href="{{ route('courses.course-sessions.edit', [$course->id, $session->id]) }}"
-									class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md text-xs font-medium transition">Edit</a>
 								<form action="{{ route('courses.course-sessions.destroy', [$course->id, $session->id]) }}"
 									method="POST" onsubmit="return confirm('Are you sure you want to delete this session?')">
 									@csrf

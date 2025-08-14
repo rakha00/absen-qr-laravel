@@ -10,7 +10,6 @@ use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class CourseSessionController extends Controller
@@ -126,32 +125,12 @@ class CourseSessionController extends Controller
     {
         $session = CourseSession::findOrFail($sessionId);
 
-        Log::debug('CourseSessionController@destroy method hit for session: '.$session->id);
-        Log::info('Attempting to delete CourseSession: '.$session->id);
+        // Delete associated attendance records first
+        $session->attendances()->delete();
 
-        try {
-            // Delete associated attendance records first
-            $session->attendances()->delete();
-            Log::info('Associated attendance records deleted for session: '.$session->id);
+        $session->delete();
 
-            $deleted = $session->delete();
-
-            if ($deleted) {
-                Log::info('CourseSession deleted successfully: '.$session->id);
-
-                return redirect()->route('courses.show', $course->id)
-                    ->with('success', 'Course session deleted successfully.');
-            } else {
-                Log::warning('CourseSession deletion failed: '.$session->id);
-
-                return redirect()->route('courses.show', $course->id)
-                    ->with('error', 'Failed to delete course session.');
-            }
-        } catch (\Exception $e) {
-            Log::error('Error deleting CourseSession '.$session->id.': '.$e->getMessage());
-
-            return redirect()->route('courses.show', $course->id)
-                ->with('error', 'An error occurred while deleting the course session.');
-        }
+        return redirect()->route('courses.show', $course->id)
+            ->with('success', 'Course session deleted successfully.');
     }
 }
