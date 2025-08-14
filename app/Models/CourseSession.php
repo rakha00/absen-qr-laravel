@@ -15,18 +15,12 @@ class CourseSession extends Model
 
 	protected $fillable = [
 		'course_id',
+		'session_name',
 		'session_date',
-		'start_time',
-		'end_time',
-		'qr_code_data',
-		'is_active',
 	];
 
 	protected $casts = [
-		'session_date' => 'date',
-		'start_time' => 'datetime',
-		'end_time' => 'datetime',
-		'is_active' => 'boolean',
+		'session_date' => 'datetime',
 	];
 
 	/**

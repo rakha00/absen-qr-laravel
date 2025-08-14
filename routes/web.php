@@ -20,4 +20,5 @@ Route::middleware('auth')->group(function () {
 
     // Course Management Routes
     Route::resource('courses', App\Http\Controllers\CourseController::class);
+    Route::resource('courses.course-sessions', App\Http\Controllers\CourseSessionController::class);
 });

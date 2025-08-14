@@ -17,6 +17,7 @@ Implementing the QR code attendance web application, with database migrations cr
 -   Login redirection configured to `/dashboard`.
 -   Lecturer dashboard route updated from `/lecturer/dashboard` to `/dashboard`.
 -   Blade views (`welcome.blade.php`, `auth/login.blade.php`, `auth/register.blade.php`, `lecturer/dashboard.blade.php`) updated to extend `layouts.guest` or `layouts.app` as appropriate.
+-   CRUD management for course sessions has been implemented, including a controller, routes (nested under courses), views, and updates to the `CourseSession` model.
 
 ## Next Steps
 
