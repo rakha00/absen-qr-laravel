@@ -13,6 +13,7 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
+
         return view('courses.index', compact('courses'));
     }
 
@@ -39,7 +40,7 @@ class CourseController extends Controller
             'name' => $request->name,
             'code' => $request->code,
             'description' => $request->description,
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('courses.index')->with('success', 'Course created successfully.');
@@ -68,7 +69,7 @@ class CourseController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'code' => 'required|string|max:255|unique:courses,code,' . $course->id,
+            'code' => 'required|string|max:255|unique:courses,code,'.$course->id,
             'description' => 'nullable|string',
         ]);
 

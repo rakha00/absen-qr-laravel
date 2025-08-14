@@ -9,28 +9,28 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Course extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
-	protected $fillable = [
-		'user_id',
-		'name',
-		'code',
-		'description',
-	];
+    protected $fillable = [
+        'user_id',
+        'name',
+        'code',
+        'description',
+    ];
 
-	/**
-	 * Get the user (lecturer) that owns the course.
-	 */
-	public function user(): BelongsTo
-	{
-		return $this->belongsTo(User::class);
-	}
+    /**
+     * Get the user (lecturer) that owns the course.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
-	/**
-	 * Get the sessions for the course.
-	 */
-	public function courseSessions(): HasMany
-	{
-		return $this->hasMany(CourseSession::class);
-	}
+    /**
+     * Get the sessions for the course.
+     */
+    public function courseSessions(): HasMany
+    {
+        return $this->hasMany(CourseSession::class);
+    }
 }

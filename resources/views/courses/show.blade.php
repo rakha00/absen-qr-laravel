@@ -33,10 +33,6 @@
 					class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition">
 					Edit
 				</a>
-				<a href="{{ route('courses.course-sessions.index', $course->id) }}"
-					class="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg shadow-sm transition">
-					Manage Sessions
-				</a>
 			</div>
 		</div>
 

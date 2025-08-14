@@ -21,7 +21,7 @@ class CourseFactory extends Factory
         return [
             'user_id' => $lecturer->id,
             'name' => $this->faker->sentence(3),
-            'code' => $this->faker->unique()->word() . $this->faker->randomNumber(3),
+            'code' => $this->faker->unique()->word().$this->faker->randomNumber(3),
             'description' => $this->faker->paragraph,
         ];
     }

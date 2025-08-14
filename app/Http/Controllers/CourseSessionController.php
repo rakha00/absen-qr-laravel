@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\CourseSession;
-use Illuminate\Http\Request;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel;
-use Endroid\QrCode\Label\LabelAlignment;
-use Endroid\QrCode\Label\Font\OpenSans;
 use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\PngWriter;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class CourseSessionController extends Controller
@@ -22,6 +21,7 @@ class CourseSessionController extends Controller
     public function index(Course $course)
     {
         $course->load('courseSessions'); // Eager load the courseSessions relationship
+
         return view('course-sessions.index', compact('course'));
     }
 
@@ -50,7 +50,7 @@ class CourseSessionController extends Controller
 
         $qrCodeBuilder = new Builder(
             data: $attendanceUrl,
-            writer: new PngWriter(),
+            writer: new PngWriter,
             encoding: new Encoding('UTF-8'),
             errorCorrectionLevel: ErrorCorrectionLevel::High,
             size: 300,
@@ -60,7 +60,7 @@ class CourseSessionController extends Controller
 
         $qrCodeResult = $qrCodeBuilder->build();
 
-        $qrCodePath = 'qrcodes/' . $sessionUuid . '.png';
+        $qrCodePath = 'qrcodes/'.$sessionUuid.'.png';
         $qrCodeResult->saveToFile(public_path($qrCodePath));
 
         $session = $course->courseSessions()->create([
@@ -82,6 +82,7 @@ class CourseSessionController extends Controller
     public function show(Course $course, CourseSession $session)
     {
         $session->load('attendances.student'); // Eager load attendances and their associated students
+
         return view('course-sessions.show', compact('course', 'session'));
     }
 
@@ -121,11 +122,36 @@ class CourseSessionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course, CourseSession $session)
+    public function destroy(Course $course, $sessionId)
     {
-        $session->delete();
+        $session = CourseSession::findOrFail($sessionId);
 
-        return redirect()->route('courses.course-sessions.index', $course->id)
-            ->with('success', 'Course session deleted successfully.');
+        Log::debug('CourseSessionController@destroy method hit for session: '.$session->id);
+        Log::info('Attempting to delete CourseSession: '.$session->id);
+
+        try {
+            // Delete associated attendance records first
+            $session->attendances()->delete();
+            Log::info('Associated attendance records deleted for session: '.$session->id);
+
+            $deleted = $session->delete();
+
+            if ($deleted) {
+                Log::info('CourseSession deleted successfully: '.$session->id);
+
+                return redirect()->route('courses.show', $course->id)
+                    ->with('success', 'Course session deleted successfully.');
+            } else {
+                Log::warning('CourseSession deletion failed: '.$session->id);
+
+                return redirect()->route('courses.show', $course->id)
+                    ->with('error', 'Failed to delete course session.');
+            }
+        } catch (\Exception $e) {
+            Log::error('Error deleting CourseSession '.$session->id.': '.$e->getMessage());
+
+            return redirect()->route('courses.show', $course->id)
+                ->with('error', 'An error occurred while deleting the course session.');
+        }
     }
 }

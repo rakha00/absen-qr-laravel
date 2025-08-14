@@ -18,7 +18,6 @@
 				<table class="min-w-full divide-y divide-gray-200 text-sm">
 					<thead class="bg-gray-50">
 						<tr>
-							<th class="px-4 py-3 text-left font-semibold text-gray-600">ID</th>
 							<th class="px-4 py-3 text-left font-semibold text-gray-600">Nama</th>
 							<th class="px-4 py-3 text-left font-semibold text-gray-600">Kode</th>
 							<th class="px-4 py-3 text-left font-semibold text-gray-600">Deskripsi</th>
@@ -28,7 +27,6 @@
 					<tbody class="divide-y divide-gray-100">
 						@forelse ($courses as $course)
 							<tr class="hover:bg-gray-50">
-								<td class="px-4 py-3 text-gray-700">{{ $course->id }}</td>
 								<td class="px-4 py-3 text-gray-700">{{ $course->name }}</td>
 								<td class="px-4 py-3 text-gray-700">{{ $course->code }}</td>
 								<td class="px-4 py-3 text-gray-600">{{ $course->description }}</td>
@@ -37,10 +35,6 @@
 										<a href="{{ route('courses.show', $course->id) }}"
 											class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-md text-xs font-medium transition">
 											Lihat
-										</a>
-										<a href="{{ route('courses.edit', $course->id) }}"
-											class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md text-xs font-medium transition">
-											Edit
 										</a>
 										<form action="{{ route('courses.destroy', $course->id) }}" method="POST"
 											onsubmit="return confirm('Yakin hapus?')">
@@ -51,10 +45,6 @@
 												Hapus
 											</button>
 										</form>
-										<a href="{{ route('courses.course-sessions.index', $course->id) }}"
-											class="px-3 py-1 bg-purple-500 hover:bg-purple-600 text-white rounded-md text-xs font-medium transition">
-											Sesi
-										</a>
 									</div>
 								</td>
 							</tr>

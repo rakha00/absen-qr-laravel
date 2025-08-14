@@ -8,19 +8,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Student extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
-	protected $fillable = [
-		'name',
-		'nim',
-		'email',
-	];
+    protected $fillable = [
+        'name',
+        'nim',
+        'email',
+    ];
 
-	/**
-	 * Get the attendances for the student.
-	 */
-	public function attendances(): HasMany
-	{
-		return $this->hasMany(Attendance::class);
-	}
+    /**
+     * Get the attendances for the student.
+     */
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
+    }
 }

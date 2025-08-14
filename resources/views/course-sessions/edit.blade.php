@@ -20,7 +20,8 @@
 		@endif
 
 		<div class="bg-white shadow overflow-hidden sm:rounded-lg p-6">
-			<form action="{{ route('courses.course-sessions.update', [$course->id, $session->id]) }}" method="POST">
+			{{-- <form action="{{ route('courses.course-sessions.update', [$course->id, $session->id]) }}" method="POST">
+				--}}
 				@csrf
 				@method('PUT')
 				<div class="mb-4">
@@ -33,19 +34,19 @@
 					<label for="session_date" class="block text-sm font-medium text-gray-700">Session Date</label>
 					<input type="date" name="session_date" id="session_date"
 						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-						value="{{ old('session_date', $session->session_date->format('Y-m-d')) }}" required>
+						{{-- value="{{ old('session_date', $session->session_date->format('Y-m-d')) }}" required> --}}
 				</div>
 				<div class="mb-4">
 					<label for="start_time" class="block text-sm font-medium text-gray-700">Start Time</label>
 					<input type="time" name="start_time" id="start_time"
 						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-						value="{{ old('start_time', $session->start_time->format('H:i')) }}" required>
+						{{-- value="{{ old('start_time', $session->start_time->format('H:i')) }}" required> --}}
 				</div>
 				<div class="mb-4">
 					<label for="end_time" class="block text-sm font-medium text-gray-700">End Time</label>
 					<input type="time" name="end_time" id="end_time"
 						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-						value="{{ old('end_time', $session->end_time->format('H:i')) }}" required>
+						{{-- value="{{ old('end_time', $session->end_time->format('H:i')) }}" required> --}}
 				</div>
 				<div class="mb-4">
 					<label for="is_active" class="block text-sm font-medium text-gray-700">Session Status</label>
