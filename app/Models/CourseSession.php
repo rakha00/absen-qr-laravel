@@ -17,10 +17,16 @@ class CourseSession extends Model
 		'course_id',
 		'session_name',
 		'session_date',
+		'start_time',
+		'end_time',
+		'qr_code_data',
+		'qr_code_path',
 	];
 
 	protected $casts = [
-		'session_date' => 'datetime',
+		'session_date' => 'date', // Change to 'date'
+		'start_time' => 'datetime',
+		'end_time' => 'datetime',
 	];
 
 	/**

@@ -5,6 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\CourseSession;
 use Illuminate\Http\Request;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\Label\LabelAlignment;
+use Endroid\QrCode\Label\Font\OpenSans;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\PngWriter;
+use Illuminate\Support\Str;
 
 class CourseSessionController extends Controller
 {
@@ -33,12 +41,39 @@ class CourseSessionController extends Controller
         $validated = $request->validate([
             'session_name' => 'required|string|max:255',
             'session_date' => 'required|date',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
         ]);
 
-        $course->courseSessions()->create($validated);
+        $sessionUuid = Str::uuid();
+        $attendanceUrl = route('attendance.show', ['uuid' => $sessionUuid]);
 
-        return redirect()->route('courses.course-sessions.index', $course->id)
-            ->with('success', 'Course session created successfully.');
+        $qrCodeBuilder = new Builder(
+            data: $attendanceUrl,
+            writer: new PngWriter(),
+            encoding: new Encoding('UTF-8'),
+            errorCorrectionLevel: ErrorCorrectionLevel::High,
+            size: 300,
+            margin: 10,
+            roundBlockSizeMode: RoundBlockSizeMode::Margin,
+        );
+
+        $qrCodeResult = $qrCodeBuilder->build();
+
+        $qrCodePath = 'qrcodes/' . $sessionUuid . '.png';
+        $qrCodeResult->saveToFile(public_path($qrCodePath));
+
+        $session = $course->courseSessions()->create([
+            'session_name' => $validated['session_name'],
+            'session_date' => $validated['session_date'],
+            'start_time' => $validated['start_time'],
+            'end_time' => $validated['end_time'],
+            'qr_code_data' => $sessionUuid, // Store the UUID, not the full URL or path
+            'qr_code_path' => $qrCodePath, // Store the public path to the QR code image
+        ]);
+
+        return redirect()->route('courses.course-sessions.show', ['course' => $course->id, 'course_session' => $session->id])
+            ->with('success', 'Course session created successfully. QR code generated.');
     }
 
     /**
@@ -46,6 +81,7 @@ class CourseSessionController extends Controller
      */
     public function show(Course $course, CourseSession $session)
     {
+        $session->load('attendances.student'); // Eager load attendances and their associated students
         return view('course-sessions.show', compact('course', 'session'));
     }
 
@@ -65,9 +101,18 @@ class CourseSessionController extends Controller
         $validated = $request->validate([
             'session_name' => 'required|string|max:255',
             'session_date' => 'required|date',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
+            'is_active' => 'boolean',
         ]);
 
-        $session->update($validated);
+        $session->update([
+            'session_name' => $validated['session_name'],
+            'session_date' => $validated['session_date'],
+            'start_time' => $validated['start_time'],
+            'end_time' => $validated['end_time'],
+            'is_active' => $request->has('is_active'),
+        ]);
 
         return redirect()->route('courses.course-sessions.index', $course->id)
             ->with('success', 'Course session updated successfully.');

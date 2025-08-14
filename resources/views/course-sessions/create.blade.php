@@ -29,10 +29,22 @@
 						value="{{ old('session_name') }}" required>
 				</div>
 				<div class="mb-4">
-					<label for="session_date" class="block text-sm font-medium text-gray-700">Session Date and Time</label>
-					<input type="datetime-local" name="session_date" id="session_date"
+					<label for="session_date" class="block text-sm font-medium text-gray-700">Session Date</label>
+					<input type="date" name="session_date" id="session_date"
 						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
 						value="{{ old('session_date') }}" required>
+				</div>
+				<div class="mb-4">
+					<label for="start_time" class="block text-sm font-medium text-gray-700">Start Time</label>
+					<input type="time" name="start_time" id="start_time"
+						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+						value="{{ old('start_time') }}" required>
+				</div>
+				<div class="mb-4">
+					<label for="end_time" class="block text-sm font-medium text-gray-700">End Time</label>
+					<input type="time" name="end_time" id="end_time"
+						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+						value="{{ old('end_time') }}" required>
 				</div>
 				<button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Create
 					Session</button>

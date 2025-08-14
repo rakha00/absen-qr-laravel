@@ -42,11 +42,12 @@
 								<div class="text-sm text-gray-900">{{ $session->session_date->format('Y-m-d H:i') }}</div>
 							</td>
 							<td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-								<a href="{{ route('courses.course-sessions.show', [$course->id, $session->id]) }}"
+								<a href="{{ route('courses.course-sessions.show', ['course' => $course->id, 'course_session' => $session->id]) }}"
 									class="text-blue-600 hover:text-blue-900 mr-2">View</a>
-								<a href="{{ route('courses.course-sessions.edit', [$course->id, $session->id]) }}"
+								<a href="{{ route('courses.course-sessions.edit', ['course' => $course->id, 'course_session' => $session->id]) }}"
 									class="text-indigo-600 hover:text-indigo-900 mr-2">Edit</a>
-								<form action="{{ route('courses.course-sessions.destroy', [$course->id, $session->id]) }}"
+								<form
+									action="{{ route('courses.course-sessions.destroy', ['course' => $course->id, 'course_session' => $session->id]) }}"
 									method="POST" class="inline">
 									@csrf
 									@method('DELETE')

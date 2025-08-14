@@ -22,7 +22,8 @@ class CourseSessionSeeder extends Seeder
                 'session_date' => now()->addDays(7)->format('Y-m-d'),
                 'start_time' => '09:00:00',
                 'end_time' => '10:00:00',
-                'qr_code_data' => 'CS101-20250820-0900',
+                'qr_code_data' => \Illuminate\Support\Str::uuid(),
+                'qr_code_path' => 'qrcodes/' . \Illuminate\Support\Str::uuid() . '.png', // Placeholder path
                 'is_active' => true,
             ]);
 
@@ -32,7 +33,8 @@ class CourseSessionSeeder extends Seeder
                 'session_date' => now()->addDays(14)->format('Y-m-d'),
                 'start_time' => '10:00:00',
                 'end_time' => '11:00:00',
-                'qr_code_data' => 'CS101-20250827-1000',
+                'qr_code_data' => \Illuminate\Support\Str::uuid(),
+                'qr_code_path' => 'qrcodes/' . \Illuminate\Support\Str::uuid() . '.png', // Placeholder path
                 'is_active' => false,
             ]);
         }

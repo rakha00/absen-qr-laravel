@@ -13,17 +13,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            StudentSeeder::class,
+                // StudentSeeder::class,
             CourseSeeder::class,
-            CourseSessionSeeder::class,
-            AttendanceSeeder::class,
-        ]);
-
-        \App\Models\User::factory()->create([
-            'name' => 'Lecturer One',
-            'email' => 'admin@gamil.com',
-            'password' => \Hash::make('admin'),
-            'nip' => '1234567890',
+            // CourseSessionSeeder::class,
+            // AttendanceSeeder::class,
         ]);
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->time('start_time');
             $table->time('end_time');
             $table->text('qr_code_data');
+            $table->string('qr_code_path')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
