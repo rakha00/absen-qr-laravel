@@ -60,7 +60,7 @@ class CourseSessionController extends Controller
 
         $qrCodeResult = $qrCodeBuilder->build();
 
-        $qrCodePath = 'qrcodes/' . $sessionUuid . '.png';
+        $qrCodePath = 'qrcodes/'.$sessionUuid.'.png';
         // Save the QR code to the 'public' disk in storage
         // This will save to storage/app/public/qrcodes/
         Storage::disk('public')->put($qrCodePath, $qrCodeResult->getString());
@@ -74,7 +74,7 @@ class CourseSessionController extends Controller
             'qr_code_path' => $qrCodePath, // Store the public path to the QR code image
         ]);
 
-        return redirect()->route('courses.course-sessions.show', ['course' => $course->id, 'course_session' => $session->id])
+        return redirect()->route('courses.course-sessions.show', ['course' => $course->id, 'session' => $session->id])
             ->with('success', 'Course session created successfully. QR code generated.');
     }
 

@@ -48,7 +48,7 @@
 				<div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
 					<span class="text-sm font-medium text-gray-500">QR Code</span>
 					<div class="mt-1 sm:col-span-2">
-						<img src="{{ asset($session->qr_code_path) }}" alt="QR Code" class="w-40 h-40 mx-auto sm:mx-0">
+						<img src="{{ Storage::url($session->qr_code_path) }}" alt="QR Code" class="w-40 h-40 mx-auto sm:mx-0">
 						<p class="text-xs text-gray-500 mt-2 text-center sm:text-left">Scan this QR code to access the
 							attendance page.</p>
 					</div>

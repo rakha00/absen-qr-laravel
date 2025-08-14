@@ -50,7 +50,7 @@
 								<p class="text-gray-500 text-sm">{{ $session->session_date->format('Y-m-d H:i') }}</p>
 							</div>
 							<div class="flex gap-2">
-								<a href="{{ asset($session->qr_code_path) }}" target="_blank"
+								<a href="{{ Storage::url($session->qr_code_path) }}" target="_blank"
 									class="px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md text-xs font-medium transition">QR</a>
 								<a href="{{ route('courses.course-sessions.show', [$course->id, $session->id]) }}"
 									class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-md text-xs font-medium transition">View</a>
