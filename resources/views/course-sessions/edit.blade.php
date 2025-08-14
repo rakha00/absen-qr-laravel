@@ -1,17 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="container mx-auto px-4 py-8">
-		<div class="flex justify-between items-center mb-4">
-			<h1 class="text-2xl font-semibold">Edit Session for {{ $course->name }}</h1>
-			<a href="{{ route('courses.course-sessions.index', $course->id) }}"
-				class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Back to Sessions</a>
+	<div class="max-w-3xl mx-auto px-4 py-8">
+		<!-- Header -->
+		<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+			<h1 class="text-2xl font-bold text-gray-800">
+				Edit Session - {{ $course->name }}
+			</h1>
+			<a href="{{ route('courses.show', $course->id) }}"
+				class="inline-block bg-gray-500 hover:bg-gray-600 text-white text-sm font-medium px-4 py-2 rounded-md">
+				← Back to Course Details
+			</a>
 		</div>
 
+		<!-- Error Messages -->
 		@if ($errors->any())
-			<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-				<strong class="font-bold">Whoops!</strong> There were some problems with your input.
-				<ul class="mt-3 list-disc list-inside">
+			<div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-md mb-6">
+				<div class="text-red-800 font-semibold mb-2">Please fix the following errors:</div>
+				<ul class="list-disc list-inside text-red-700 text-sm">
 					@foreach ($errors->all() as $error)
 						<li>{{ $error }}</li>
 					@endforeach
@@ -19,44 +25,59 @@
 			</div>
 		@endif
 
-		<div class="bg-white shadow overflow-hidden sm:rounded-lg p-6">
-			{{-- <form action="{{ route('courses.course-sessions.update', [$course->id, $session->id]) }}" method="POST">
-				--}}
+		<!-- Edit Form -->
+		<div class="bg-white rounded-lg shadow p-6">
+			<form action="{{ route('courses.course-sessions.update', [$course->id, $session->id]) }}" method="POST"
+				class="space-y-5">
 				@csrf
 				@method('PUT')
-				<div class="mb-4">
+
+				<!-- Session Name -->
+				<div>
 					<label for="session_name" class="block text-sm font-medium text-gray-700">Session Name</label>
 					<input type="text" name="session_name" id="session_name"
-						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-						value="{{ old('session_name', $session->session_name) }}" required>
+						value="{{ old('session_name', $session->session_name) }}" required
+						class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
 				</div>
-				<div class="mb-4">
+
+				<!-- Session Date -->
+				<div>
 					<label for="session_date" class="block text-sm font-medium text-gray-700">Session Date</label>
 					<input type="date" name="session_date" id="session_date"
-						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-						{{-- value="{{ old('session_date', $session->session_date->format('Y-m-d')) }}" required> --}}
+						value="{{ old('session_date', optional($session->session_date)->format('Y-m-d')) }}" required
+						class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
 				</div>
-				<div class="mb-4">
+
+				<!-- Start Time -->
+				<div>
 					<label for="start_time" class="block text-sm font-medium text-gray-700">Start Time</label>
 					<input type="time" name="start_time" id="start_time"
-						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-						{{-- value="{{ old('start_time', $session->start_time->format('H:i')) }}" required> --}}
+						value="{{ old('start_time', optional($session->start_time)->format('H:i')) }}" required
+						class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
 				</div>
-				<div class="mb-4">
+
+				<!-- End Time -->
+				<div>
 					<label for="end_time" class="block text-sm font-medium text-gray-700">End Time</label>
 					<input type="time" name="end_time" id="end_time"
-						class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-						{{-- value="{{ old('end_time', $session->end_time->format('H:i')) }}" required> --}}
+						value="{{ old('end_time', optional($session->end_time)->format('H:i')) }}" required
+						class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
 				</div>
-				<div class="mb-4">
-					<label for="is_active" class="block text-sm font-medium text-gray-700">Session Status</label>
+
+				<!-- Status -->
+				<div class="flex items-center">
 					<input type="checkbox" name="is_active" id="is_active"
-						class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-						@checked(old('is_active', $session->is_active))>
-					<span class="ml-2 text-sm text-gray-700">Active</span>
+						class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" @checked(old('is_active', $session->is_active))>
+					<label for="is_active" class="ml-2 block text-sm text-gray-700">Active</label>
 				</div>
-				<button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Update
-					Session</button>
+
+				<!-- Submit -->
+				<div class="pt-4">
+					<button type="submit"
+						class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 rounded-md">
+						Update Session
+					</button>
+				</div>
 			</form>
 		</div>
 	</div>

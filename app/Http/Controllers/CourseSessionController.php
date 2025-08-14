@@ -10,6 +10,7 @@ use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CourseSessionController extends Controller
@@ -59,8 +60,10 @@ class CourseSessionController extends Controller
 
         $qrCodeResult = $qrCodeBuilder->build();
 
-        $qrCodePath = 'qrcodes/'.$sessionUuid.'.png';
-        $qrCodeResult->saveToFile(public_path($qrCodePath));
+        $qrCodePath = 'qrcodes/' . $sessionUuid . '.png';
+        // Save the QR code to the 'public' disk in storage
+        // This will save to storage/app/public/qrcodes/
+        Storage::disk('public')->put($qrCodePath, $qrCodeResult->getString());
 
         $session = $course->courseSessions()->create([
             'session_name' => $validated['session_name'],
