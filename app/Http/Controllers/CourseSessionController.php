@@ -60,7 +60,7 @@ class CourseSessionController extends Controller
 
         $qrCodeResult = $qrCodeBuilder->build();
 
-        $qrCodePath = 'qrcodes/'.$sessionUuid.'.png';
+        $qrCodePath = 'qrcodes/' . $sessionUuid . '.png';
         // Save the QR code to the 'public' disk in storage
         // This will save to storage/app/public/qrcodes/
         Storage::disk('public')->put($qrCodePath, $qrCodeResult->getString());
@@ -106,7 +106,7 @@ class CourseSessionController extends Controller
             'session_date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
-            'is_active' => 'boolean',
+            'is_active' => 'nullable|boolean',
         ]);
 
         $session->update([
@@ -114,10 +114,10 @@ class CourseSessionController extends Controller
             'session_date' => $validated['session_date'],
             'start_time' => $validated['start_time'],
             'end_time' => $validated['end_time'],
-            'is_active' => $request->has('is_active'),
+            'is_active' => $request->boolean('is_active'),
         ]);
 
-        return redirect()->route('courses.course-sessions.index', $course->id)
+        return redirect()->route('courses.show', $course->id)
             ->with('success', 'Course session updated successfully.');
     }
 

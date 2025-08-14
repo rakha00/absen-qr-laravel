@@ -34,10 +34,12 @@ class CourseSession extends Model
         'end_time',
         'qr_code_data',
         'qr_code_path',
+        'is_active', // Add is_active to fillable
     ];
 
     protected $casts = [
-        'session_date' => 'date', // Change to 'date'
+        'session_date' => 'date',
+        'is_active' => 'boolean', // Cast is_active to boolean
         'start_time' => 'datetime',
         'end_time' => 'datetime',
     ];
