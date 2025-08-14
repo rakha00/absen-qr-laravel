@@ -13,6 +13,7 @@ class CourseSessionController extends Controller
      */
     public function index(Course $course)
     {
+        $course->load('courseSessions'); // Eager load the courseSessions relationship
         return view('course-sessions.index', compact('course'));
     }
 

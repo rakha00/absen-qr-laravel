@@ -18,6 +18,7 @@ class CourseSessionSeeder extends Seeder
         if ($course) {
             \App\Models\CourseSession::factory()->create([
                 'course_id' => $course->id,
+                'session_name' => 'Session 1 for ' . $course->name,
                 'session_date' => now()->addDays(7)->format('Y-m-d'),
                 'start_time' => '09:00:00',
                 'end_time' => '10:00:00',
@@ -27,6 +28,7 @@ class CourseSessionSeeder extends Seeder
 
             \App\Models\CourseSession::factory()->create([
                 'course_id' => $course->id,
+                'session_name' => 'Session 2 for ' . $course->name,
                 'session_date' => now()->addDays(14)->format('Y-m-d'),
                 'start_time' => '10:00:00',
                 'end_time' => '11:00:00',

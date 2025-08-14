@@ -33,8 +33,49 @@
 					class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition">
 					Edit
 				</a>
+				<a href="{{ route('courses.course-sessions.index', $course->id) }}"
+					class="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg shadow-sm transition">
+					Manage Sessions
+				</a>
 			</div>
 		</div>
 
+		<!-- Session List -->
+		<div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6 mt-6">
+			<h2 class="text-xl font-bold text-gray-800 mb-4">Course Sessions</h2>
+			@if ($course->courseSessions->isEmpty())
+				<p class="text-gray-600">No sessions available for this course.</p>
+			@else
+				<ul class="divide-y divide-gray-200">
+					@foreach ($course->courseSessions as $session)
+						<li class="py-3 flex justify-between items-center">
+							<div>
+								<p class="text-gray-800">{{ $session->session_name }}</p>
+								<p class="text-gray-500 text-sm">{{ $session->session_date->format('Y-m-d H:i') }}</p>
+							</div>
+							<div class="flex gap-2">
+								<a href="{{ route('courses.course-sessions.show', [$course->id, $session->id]) }}"
+									class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-md text-xs font-medium transition">View</a>
+								<a href="{{ route('courses.course-sessions.edit', [$course->id, $session->id]) }}"
+									class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md text-xs font-medium transition">Edit</a>
+								<form action="{{ route('courses.course-sessions.destroy', [$course->id, $session->id]) }}"
+									method="POST" onsubmit="return confirm('Are you sure you want to delete this session?')">
+									@csrf
+									@method('DELETE')
+									<button type="submit"
+										class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-xs font-medium transition">Delete</button>
+								</form>
+							</div>
+						</li>
+					@endforeach
+				</ul>
+			@endif
+			<div class="mt-4">
+				<a href="{{ route('courses.course-sessions.create', $course->id) }}"
+					class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow-sm transition">
+					+ Add New Session
+				</a>
+			</div>
+		</div>
 	</div>
 @endsection

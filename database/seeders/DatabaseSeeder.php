@@ -18,5 +18,12 @@ class DatabaseSeeder extends Seeder
             CourseSessionSeeder::class,
             AttendanceSeeder::class,
         ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Lecturer One',
+            'email' => 'admin@gamil.com',
+            'password' => \Hash::make('admin'),
+            'nip' => '1234567890',
+        ]);
     }
 }

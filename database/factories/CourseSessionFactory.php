@@ -20,6 +20,7 @@ class CourseSessionFactory extends Factory
 
         return [
             'course_id' => $course->id,
+            'session_name' => $this->faker->sentence(3), // Add a default session name
             'session_date' => $this->faker->dateTimeBetween('now', '+1 month')->format('Y-m-d'),
             'start_time' => $this->faker->time('H:i:s'),
             'end_time' => $this->faker->time('H:i:s'),

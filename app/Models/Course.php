@@ -29,7 +29,7 @@ class Course extends Model
 	/**
 	 * Get the sessions for the course.
 	 */
-	public function sessions(): HasMany
+	public function courseSessions(): HasMany
 	{
 		return $this->hasMany(CourseSession::class);
 	}

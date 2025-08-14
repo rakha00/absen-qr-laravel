@@ -51,6 +51,10 @@
 												Hapus
 											</button>
 										</form>
+										<a href="{{ route('courses.course-sessions.index', $course->id) }}"
+											class="px-3 py-1 bg-purple-500 hover:bg-purple-600 text-white rounded-md text-xs font-medium transition">
+											Sesi
+										</a>
 									</div>
 								</td>
 							</tr>

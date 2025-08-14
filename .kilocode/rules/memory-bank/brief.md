@@ -1,1 +1,0 @@
-This project is a Laravel web application utilizing a Model-View-Controller (MVC) architecture. The frontend is built with JavaScript and Tailwind CSS, bundled efficiently by Vite. It serves as a robust and scalable platform for web content and user interaction, focusing on intuitive design, responsiveness, fast performance, and reliable functionality.
