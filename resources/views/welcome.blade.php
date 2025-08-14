@@ -20,26 +20,6 @@
 	<header
 		class="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center px-4 py-4 bg-white/80 backdrop-blur-md shadow-sm">
 		<div class="text-xl font-bold text-blue-600 text-center sm:text-left">AbsenQR</div>
-
-		@if (Route::has('login'))
-			<div class="mt-2 flex justify-center sm:mt-0 sm:justify-end space-x-2">
-				@auth
-					<a href="{{ url('/dashboard') }}" class="text-gray-700 hover:text-blue-500 font-medium px-3 py-2">
-						Dashboard
-					</a>
-				@else
-					<a href="{{ route('login') }}" class="text-gray-700 hover:text-blue-500 font-medium px-3 py-2">
-						Log in
-					</a>
-					@if (Route::has('register'))
-						<a href="{{ route('register') }}"
-							class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow text-sm sm:text-base">
-							Register
-						</a>
-					@endif
-				@endauth
-			</div>
-		@endif
 	</header>
 
 	<!-- Hero Section -->
