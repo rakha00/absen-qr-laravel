@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.guest')
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login - AbsenQR</title>
-	@vite('resources/css/app.css')
-</head>
-
-<body class="bg-gradient-to-b from-blue-50 to-white min-h-screen flex items-center justify-center px-4">
-
+@section('content')
 	<div class="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
 		<!-- Logo -->
 		<div class="flex flex-col items-center mb-6">
@@ -24,7 +15,7 @@
 		<!-- Error Alerts -->
 		@if ($errors->any())
 			<div class="bg-red-50 border border-red-300 text-red-600 px-4 py-3 rounded-lg mb-4 text-sm">
-				<ul class="list-disc list-inside">
+				<ul class="list-disc list-inside space-y-1">
 					@foreach ($errors->all() as $error)
 						<li>{{ $error }}</li>
 					@endforeach
@@ -39,7 +30,7 @@
 		@endif
 
 		<!-- Login Form -->
-		<form action="/login" method="POST" class="space-y-5">
+		<form action="{{ route('login') }}" method="POST" class="space-y-5">
 			@csrf
 			<div>
 				<label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
@@ -61,11 +52,8 @@
 
 			<p class="text-center text-sm text-gray-600">
 				Belum punya akun?
-				<a href="/register" class="text-blue-600 hover:underline">Daftar</a>
+				<a href="{{ route('register') }}" class="text-blue-600 hover:underline">Daftar</a>
 			</p>
 		</form>
 	</div>
-
-</body>
-
-</html>
+@endsection

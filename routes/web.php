@@ -17,4 +17,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [App\Http\Controllers\LecturerDashboardController::class, 'index'])->name('dashboard');
+
+    // Course Management Routes
+    Route::resource('courses', App\Http\Controllers\CourseController::class);
 });

@@ -16,9 +16,8 @@ Implementing the QR code attendance web application, with database migrations cr
 -   `RedirectIfAuthenticated` middleware created and implemented to prevent logged-in users from accessing welcome, login, and register pages.
 -   Login redirection configured to `/dashboard`.
 -   Lecturer dashboard route updated from `/lecturer/dashboard` to `/dashboard`.
+-   Blade views (`welcome.blade.php`, `auth/login.blade.php`, `auth/register.blade.php`, `lecturer/dashboard.blade.php`) updated to extend `layouts.guest` or `layouts.app` as appropriate.
 
 ## Next Steps
 
-1.  Eloquent Models and Relationships implemented.
-2.  All database migrations have been run and the database has been seeded with initial data.
-3.  Continue developing features for the QR code attendance system.
+1.  Continue developing features for the QR code attendance system.
