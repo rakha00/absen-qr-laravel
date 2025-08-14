@@ -15,7 +15,7 @@
 	<!-- Cards -->
 	<div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 		<!-- My Courses -->
-		<a href="#"
+		<a href="{{ route('courses.index') }}"
 			class="bg-white border border-gray-200 rounded-xl shadow-md p-6 hover:shadow-lg hover:-translate-y-1 transition transform">
 			<div class="flex items-center mb-4">
 				<span class="bg-blue-100 text-blue-600 p-3 rounded-lg">

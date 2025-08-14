@@ -1,23 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="container">
-		<h1>Create New Course</h1>
-		<form action="{{ route('courses.store') }}" method="POST">
-			@csrf
-			<div class="form-group">
-				<label for="name">Course Name:</label>
-				<input type="text" class="form-control" id="name" name="name" required>
-			</div>
-			<div class="form-group">
-				<label for="code">Course Code:</label>
-				<input type="text" class="form-control" id="code" name="code" required>
-			</div>
-			<div class="form-group">
-				<label for="description">Description:</label>
-				<textarea class="form-control" id="description" name="description"></textarea>
-			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+	<div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+
+		<!-- Header -->
+		<h1 class="text-2xl font-bold text-gray-800 mb-6">Tambah Mata Kuliah Baru</h1>
+
+		<!-- Form -->
+		<div class="bg-white shadow-sm border border-gray-200 rounded-lg p-6">
+			<form action="{{ route('courses.store') }}" method="POST" class="space-y-5">
+				@csrf
+
+				<!-- Nama -->
+				<div>
+					<label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Mata Kuliah</label>
+					<input type="text" id="name" name="name" value="{{ old('name') }}" required
+						class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800">
+				</div>
+
+				<!-- Kode -->
+				<div>
+					<label for="code" class="block text-sm font-medium text-gray-700 mb-1">Kode Mata Kuliah</label>
+					<input type="text" id="code" name="code" value="{{ old('code') }}" required
+						class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800">
+				</div>
+
+				<!-- Deskripsi -->
+				<div>
+					<label for="description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
+					<textarea id="description" name="description" rows="4"
+						class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800">{{ old('description') }}</textarea>
+				</div>
+
+				<!-- Tombol -->
+				<div class="flex items-center gap-3">
+					<button type="submit"
+						class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition">
+						Simpan
+					</button>
+					<a href="{{ route('courses.index') }}"
+						class="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition">
+						Batal
+					</a>
+				</div>
+			</form>
+		</div>
+
 	</div>
 @endsection

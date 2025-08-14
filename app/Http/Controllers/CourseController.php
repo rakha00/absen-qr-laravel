@@ -35,7 +35,12 @@ class CourseController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        Course::create($request->all());
+        Course::create([
+            'name' => $request->name,
+            'code' => $request->code,
+            'description' => $request->description,
+            'user_id' => auth()->id()
+        ]);
 
         return redirect()->route('courses.index')->with('success', 'Course created successfully.');
     }
