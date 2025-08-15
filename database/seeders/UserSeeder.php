@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
             'name' => 'Lecturer One',
             'email' => 'admin@gmail.com',
             'password' => \Hash::make('admin'),
-            'nip' => '1234567890',
+            'role' => 'lecturer',
         ]);
     }
 }

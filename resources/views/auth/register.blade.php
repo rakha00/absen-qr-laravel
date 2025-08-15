@@ -39,12 +39,6 @@
 					placeholder="you@example.com" required>
 			</div>
 			<div>
-				<label for="nip" class="block text-gray-700 font-medium mb-1">NIP</label>
-				<input type="text" name="nip" id="nip" value="{{ old('nip') }}"
-					class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-					placeholder="Nomor Induk Pegawai" required>
-			</div>
-			<div>
 				<label for="password" class="block text-gray-700 font-medium mb-1">Password</label>
 				<input type="password" name="password" id="password"
 					class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
