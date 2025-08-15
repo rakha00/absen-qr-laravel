@@ -31,16 +31,16 @@
 				</a>
 				<a href="{{ route('courses.edit', $course->id) }}"
 					class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-sm transition">
-					Edit
+					Ubah
 				</a>
 			</div>
 		</div>
 
 		<!-- Session List -->
 		<div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6 mt-6">
-			<h2 class="text-xl font-bold text-gray-800 mb-4">Course Sessions</h2>
+			<h2 class="text-xl font-bold text-gray-800 mb-4">Sesi Kelas</h2>
 			@if ($course->courseSessions->isEmpty())
-				<p class="text-gray-600">No sessions available for this course.</p>
+				<p class="text-gray-600">Belum ada sesi kelas untuk mata kuliah ini.</p>
 			@else
 				<ul class="divide-y divide-gray-200">
 					@foreach ($course->courseSessions as $session)
@@ -53,13 +53,13 @@
 								<a href="{{ Storage::url($session->qr_code_path) }}" target="_blank"
 									class="px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md text-xs font-medium transition">QR</a>
 								<a href="{{ route('courses.course-sessions.show', [$course->id, $session->id]) }}"
-									class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-md text-xs font-medium transition">View</a>
+									class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-md text-xs font-medium transition">Lihat</a>
 								<form action="{{ route('courses.course-sessions.destroy', [$course->id, $session->id]) }}"
 									method="POST" onsubmit="return confirm('Are you sure you want to delete this session?')">
 									@csrf
 									@method('DELETE')
 									<button type="submit"
-										class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-xs font-medium transition">Delete</button>
+										class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-xs font-medium transition">Hapus</button>
 								</form>
 							</div>
 						</li>
@@ -69,7 +69,7 @@
 			<div class="mt-4">
 				<a href="{{ route('courses.course-sessions.create', $course->id) }}"
 					class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow-sm transition">
-					+ Add New Session
+					+ Tambah Sesi Kelas
 				</a>
 			</div>
 		</div>

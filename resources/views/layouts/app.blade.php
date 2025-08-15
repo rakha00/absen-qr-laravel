@@ -16,10 +16,7 @@
 			<div class="flex justify-between items-center h-16">
 
 				<!-- Logo -->
-				<a href="{{ url('/dashboard') }}" class="flex items-center gap-2">
-					<svg class="h-7 w-7 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-						<path d="M12 2L2 7v13h20V7l-10-5z" />
-					</svg>
+				<a href="{{ url('/lecturer/dashboard') }}" class="flex items-center gap-2">
 					<span class="text-lg font-bold">{{ config('app.name', 'Absensi QR') }}</span>
 				</a>
 

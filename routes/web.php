@@ -4,7 +4,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseSessionController;
-use App\Http\Controllers\LecturerDashboardController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -21,7 +21,8 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
-    Route::get('/dashboard', [LecturerDashboardController::class, 'index'])->name('lecturer.dashboard');
+    Route::get('/lecturer/dashboard', [DashboardController::class, 'lecturerDashboard'])->name('lecturer.dashboard');
+    Route::get('/student/dashboard', [DashboardController::class, 'studentDashboard'])->name('student.dashboard');
 
     // Course Management Routes
     Route::resource('courses', CourseController::class);
