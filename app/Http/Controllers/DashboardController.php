@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 class DashboardController extends Controller
 {
-    public function lecturerDashboard()
+    public function index()
     {
-        return view('lecturer.dashboard');
-    }
+        $user = auth()->user();
 
-    public function studentDashboard()
-    {
-        return view('student.dashboard');
+        if ($user->role === 'lecturer') {
+            return view('lecturer.dashboard');
+        } elseif ($user->role === 'student') {
+            return view('student.dashboard');
+        }
+
+        return redirect('/'); // Or a default dashboard for other roles
     }
 }

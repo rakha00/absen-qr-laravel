@@ -16,12 +16,12 @@ class CourseFactory extends Factory
      */
     public function definition(): array
     {
-        $lecturer = \App\Models\User::where('nip', '!=', null)->inRandomOrder()->first();
+        $lecturer = \App\Models\User::inRandomOrder()->first();
 
         return [
             'user_id' => $lecturer->id,
             'name' => $this->faker->sentence(3),
-            'code' => $this->faker->unique()->word().$this->faker->randomNumber(3),
+            'code' => $this->faker->unique()->word() . $this->faker->randomNumber(3),
             'description' => $this->faker->paragraph,
         ];
     }

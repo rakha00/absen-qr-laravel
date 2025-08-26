@@ -80,6 +80,7 @@
 						<thead class="bg-gray-100">
 							<tr>
 								<th class="py-3 px-4 text-left font-medium text-gray-700">Nama</th>
+								<th class="py-3 px-4 text-left font-medium text-gray-700">NPM</th>
 								<th class="py-3 px-4 text-left font-medium text-gray-700">Email</th>
 								<th class="py-3 px-4 text-left font-medium text-gray-700">Waktu Absen</th>
 								<th class="py-3 px-4 text-left font-medium text-gray-700">Status Absen</th>
@@ -88,8 +89,9 @@
 						<tbody class="divide-y divide-gray-200">
 							@foreach ($session->attendances as $attendance)
 								<tr>
-									<td class="py-3 px-4">{{ $attendance->student->name }}</td>
-									<td class="py-3 px-4">{{ $attendance->student->email }}</td>
+									<td class="py-3 px-4">{{ $attendance->user->name }}</td>
+									<td class="py-3 px-4">{{ $attendance->npm }}</td>
+									<td class="py-3 px-4">{{ $attendance->user->email }}</td>
 									<td class="py-3 px-4">{{ $attendance->attendance_time->format('Y-m-d H:i:s') }}</td>
 									<td class="py-3 px-4">{{ ucfirst($attendance->status) }}</td>
 								</tr>

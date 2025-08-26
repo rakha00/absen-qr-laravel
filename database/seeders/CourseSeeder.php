@@ -16,16 +16,16 @@ class CourseSeeder extends Seeder
 
         \App\Models\Course::factory()->create([
             'user_id' => $lecturer->id,
-            'name' => 'Web Programming',
+            'name' => 'Pemrograman Web',
             'code' => 'CS101',
-            'description' => 'Introduction to web programming concepts.',
+            'description' => 'Pengantar konsep pemrograman web.',
         ]);
 
         \App\Models\Course::factory()->create([
             'user_id' => $lecturer->id,
-            'name' => 'Database Systems',
+            'name' => 'Sistem Basis Data',
             'code' => 'CS102',
-            'description' => 'Fundamentals of database design and management.',
+            'description' => 'Dasar-dasar desain dan manajemen basis data.',
         ]);
     }
 }

@@ -16,7 +16,7 @@
 			<div class="flex justify-between items-center h-16">
 
 				<!-- Logo -->
-				<a href="{{ url('/lecturer/dashboard') }}" class="flex items-center gap-2">
+				<a href="{{ route('dashboard') }}" class="flex items-center gap-2">
 					<span class="text-lg font-bold">{{ config('app.name', 'Absensi QR') }}</span>
 				</a>
 
@@ -27,7 +27,7 @@
 						@csrf
 						<button type="submit"
 							class="bg-red-500 hover:bg-red-600 text-white px-4 py-1.5 rounded-lg text-sm font-medium transition">
-							Logout
+							Keluar
 						</button>
 					</form>
 				</div>

@@ -21,8 +21,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
-    Route::get('/lecturer/dashboard', [DashboardController::class, 'lecturerDashboard'])->name('lecturer.dashboard');
-    Route::get('/student/dashboard', [DashboardController::class, 'studentDashboard'])->name('student.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Course Management Routes
     Route::resource('courses', CourseController::class);
@@ -30,9 +29,20 @@ Route::middleware('auth')->group(function () {
         'course-sessions' => 'session',
     ]);
     Route::get('courses/{course}/course-sessions', [CourseSessionController::class, 'index'])->name('courses.course-sessions.index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Course Management Routes
+    Route::resource('courses', CourseController::class);
+    Route::resource('courses.course-sessions', CourseSessionController::class)->except(['index'])->parameters([
+        'course-sessions' => 'session',
+    ]);
+    Route::get('courses/{course}/course-sessions', [CourseSessionController::class, 'index'])->name('courses.course-sessions.index');
+
+    // Student Attendance History
+    Route::get('/attendance/history', [AttendanceController::class, 'history'])->name('attendance.history');
 });
 
-// Attendance Routes (Public)
+// Public Attendance Routes
 Route::get('/attendance/{uuid}', [AttendanceController::class, 'show'])->name('attendance.show');
 Route::post('/attendance/{uuid}', [AttendanceController::class, 'store'])->name('attendance.store');
 Route::get('/success', [AttendanceController::class, 'success'])->name('attendance.success');

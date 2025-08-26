@@ -83,7 +83,7 @@ class CourseSessionController extends Controller
      */
     public function show(Course $course, CourseSession $session)
     {
-        $session->load('attendances.student'); // Eager load attendances and their associated students
+        $session->load('attendances.user'); // Eager load attendances and their associated users
 
         return view('course-sessions.show', compact('course', 'session'));
     }

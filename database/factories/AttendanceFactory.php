@@ -17,13 +17,13 @@ class AttendanceFactory extends Factory
     public function definition(): array
     {
         $session = \App\Models\CourseSession::inRandomOrder()->first();
-        $student = \App\Models\Student::inRandomOrder()->first();
+        $student = \App\Models\User::where('role', 'student')->inRandomOrder()->first();
 
         return [
             'session_id' => $session->id,
-            'student_id' => $student->id,
+            'user_id' => $student->id,
             'attendance_time' => $this->faker->dateTimeBetween('-1 week', 'now'),
-            'status' => $this->faker->randomElement(['present', 'absent', 'late']),
+            'status' => $this->faker->randomElement(['hadir', 'tidak hadir', 'terlambat', 'izin']),
         ];
     }
 }

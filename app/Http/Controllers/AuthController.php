@@ -24,7 +24,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/lecturer/dashboard'); // Redirect to intended or dashboard
+            return redirect()->intended('/dashboard'); // Redirect to intended or dashboard
         }
 
         return back()->withErrors([
@@ -49,6 +49,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'student', // Assign 'student' role to new registrations
         ]);
 
         return redirect('/login')->with('success', 'Registration successful. Please login.');

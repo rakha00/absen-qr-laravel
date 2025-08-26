@@ -30,7 +30,15 @@ class User extends Authenticatable
      */
     public function courses(): HasMany
     {
-        return $this->hasMany(Course::class, 'lecturer_id');
+        return $this->hasMany(Course::class, 'user_id');
+    }
+
+    /**
+     * Get the attendances for the user (student).
+     */
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class, 'user_id');
     }
 
     /**
