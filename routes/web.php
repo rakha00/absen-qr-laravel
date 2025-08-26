@@ -47,8 +47,12 @@ Route::post('/attendance/{uuid}', [AttendanceController::class, 'store'])->name(
 Route::get('/success', [AttendanceController::class, 'success'])->name('attendance.success');
 
 // Admin Routes (Protected by 'admin' role middleware)
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/create-lecturer', [AdminController::class, 'createLecturer'])->name('admin.create-lecturer');
     Route::post('/admin/create-lecturer', [AdminController::class, 'storeLecturer'])->name('admin.store-lecturer');
+    Route::get('/admin/lecturers', [AdminController::class, 'lecturers'])->name('admin.lecturers');
+    Route::get('/admin/lecturers/{user}/edit', [AdminController::class, 'editLecturer'])->name('admin.lecturers.edit');
+    Route::put('/admin/lecturers/{user}', [AdminController::class, 'updateLecturer'])->name('admin.lecturers.update');
+    Route::delete('/admin/lecturers/{user}', [AdminController::class, 'deleteLecturer'])->name('admin.lecturers.delete');
 });

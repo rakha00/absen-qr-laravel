@@ -13,6 +13,11 @@
 			</a>
 
 			<!-- Other Admin functionalities can be added here -->
+			<a href="{{ route('admin.lecturers') }}"
+				class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+				<h2 class="text-xl font-semibold text-gray-800 mb-2">Lihat Daftar Dosen</h2>
+				<p class="text-gray-600">Lihat dan kelola akun dosen yang terdaftar.</p>
+			</a>
 		</div>
 	</div>
 @endsection
