@@ -34,6 +34,7 @@ class AuthController extends Controller
 
     public function showRegistrationForm()
     {
+        // Only allow students to register via this form
         return view('auth.register');
     }
 
@@ -49,7 +50,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'student', // Assign 'student' role to new registrations
+            'role' => 'student', // Ensure new registrations are always 'student'
         ]);
 
         return redirect('/login')->with('success', 'Registration successful. Please login.');

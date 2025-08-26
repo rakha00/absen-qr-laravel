@@ -12,7 +12,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::where('user_id', auth()->id())->get();
 
         return view('courses.index', compact('courses'));
     }
@@ -51,6 +51,9 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
+        if ($course->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
         return view('courses.show', compact('course'));
     }
 
@@ -59,6 +62,9 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
+        if ($course->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
         return view('courses.edit', compact('course'));
     }
 
@@ -67,9 +73,13 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
+        if ($course->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'code' => 'required|string|max:255|unique:courses,code,'.$course->id,
+            'code' => 'required|string|max:255|unique:courses,code,' . $course->id,
             'description' => 'nullable|string',
         ]);
 
@@ -83,6 +93,9 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
+        if ($course->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
         $course->delete();
 
         return redirect()->route('courses.index')->with('success', 'Course deleted successfully.');

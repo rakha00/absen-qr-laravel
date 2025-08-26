@@ -40,7 +40,7 @@
 			</div>
 			<div class="mb-6">
 				<label for="npm" class="block text-gray-700 text-sm font-bold mb-2">NPM:</label>
-				<input type="text" name="npm" id="npm"
+				<input type="number" name="npm" id="npm" maxlength="15"
 					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('npm') border-red-500 @enderror"
 					value="{{ old('npm', Auth::user()->npm) }}" required>
 				@error('npm')

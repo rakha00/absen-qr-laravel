@@ -12,8 +12,10 @@ class DashboardController extends Controller
             return view('lecturer.dashboard');
         } elseif ($user->role === 'student') {
             return view('student.dashboard');
+        } elseif ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
         }
 
-        return redirect('/'); // Or a default dashboard for other roles
+        return redirect('/'); // Fallback for undefined roles
     }
 }

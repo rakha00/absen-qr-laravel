@@ -64,7 +64,7 @@ class AttendanceController extends Controller
         $user = auth()->user();
 
         $validated = $request->validate([
-            'npm' => 'required|string|max:255', // Add validation for NPM
+            'npm' => 'required|numeric|digits_between:1,15', // Update validation for NPM
         ]);
 
         // Check if user has the 'student' role

@@ -22,7 +22,7 @@
 
 				<!-- Desktop Menu -->
 				<div class="hidden md:flex items-center gap-4">
-					<span class="text-sm text-gray-600">Halo, {{ Auth::user()->name }}</span>
+					<a href="{{ route('profile.edit') }}" class="text-sm text-gray-600 hover:text-gray-900">Halo, {{ Auth::user()->name }}</a>
 					<form action="{{ route('logout') }}" method="POST">
 						@csrf
 						<button type="submit"
@@ -45,7 +45,7 @@
 		<!-- Mobile Menu -->
 		<div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 bg-white">
 			<div class="px-4 py-3 space-y-3">
-				<span class="block text-sm text-gray-600">Halo, {{ Auth::user()->name }}</span>
+				<a href="{{ route('profile.edit') }}" class="block text-sm text-gray-600 hover:text-gray-900">Halo, {{ Auth::user()->name }}</a>
 				<form action="{{ route('logout') }}" method="POST">
 					@csrf
 					<button type="submit"
